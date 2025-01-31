@@ -16,9 +16,11 @@ function getComputerChoice() {
     return cpu_choice;
 }
 
-function getHumanChoice() {
-    let input = prompt("Enter choice:");
-    console.log(input)
+function getHumanChoice(e) {
+    // let input = prompt("Enter choice:");
+    // console.log(input)
+
+    let input = e.target.textContent;
 
     return input;
 }
@@ -26,24 +28,40 @@ function getHumanChoice() {
 // const humanSelection = getHumanChoice();
 // const cpuSelection = getComputerChoice();
 
-function playRound() {
-    let humanSelection = getHumanChoice();
+function playRound(e) {
+    let humanSelection = getHumanChoice(e);
     let cpuSelection = getComputerChoice();
     console.log(`${humanSelection} ${cpuSelection}`)
 
     if (humanSelection > cpuSelection) {
         humanScore += 1;
-        console.log(`Incremented human score to ${humanScore}`)
+        resultText = `Incremented human score to ${humanScore}`;
     } else {
         cpuScore +=1;
-        console.log(`Incremented CPU score to ${cpuScore}`)
+        resultText = `Incremented CPU score to ${cpuScore}`;
     }
+
+    divResults.textContent = resultText;
 }
 
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        playRound();
-    }
+const btnRock = document.querySelector(".rock");
+const btnPaper = document.querySelector(".paper");
+const btnScissors = document.querySelector(".scissors");
+
+const divResults = document.querySelector(".results");
+
+function test() {
+    console.log("Testing");
 }
 
-playGame();
+btnRock.addEventListener("click", playRound);
+btnPaper.addEventListener("click", playRound);
+btnScissors.addEventListener("click", playRound);
+
+// function playGame() {
+//     for (let i = 0; i < 5; i++) {
+//         playRound();
+//     }
+// }
+
+// playGame();
